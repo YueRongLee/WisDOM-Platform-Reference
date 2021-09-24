@@ -1,0 +1,53 @@
+@import '~stylesheets/less/variables.less';
+.flowDetail {
+  flex: 1;
+  height: 100%;
+  min-width: 0;
+  .ant-spin-nested-loading {
+    height: 100%;
+  }
+  .ant-result-info .ant-result-icon > .anticon {
+    color: @brand-primary-light3;
+  }
+}
+.flowHeader {
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+
+    .title {
+      display: flex;
+      font-size: 14px;
+      font-weight: bold;
+      white-space: nowrap;
+      padding: 10px;
+      align-items: center;
+      .ant-row.ant-form-item {
+        margin: 0;
+      }
+    }
+
+    .flowInfo-detail-container {
+      display: flex;
+      padding-left: 41px;
+      font-size: 14px;
+      color: #879399;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      align-items: center;
+      .ant-row.ant-form-item {
+        margin: 0;
+      }
+    }
+  }
+
+
+.flowContent {
+padding: 15px;
+height: 75vh;
+.toolbutton {
+    display: flex;
+    justify-content: flex-end;
+}
+}

@@ -1,0 +1,90 @@
+@import '~stylesheets/less/variables.less';
+
+.dataSecurityPolicy {
+  background-color: white;
+  height: 100%;
+  padding: 10px;
+  overflow: auto;
+  .toolbar {
+    text-align: right;
+  }
+}
+
+.ManaTitle{
+  font-size: 35px;
+  font-weight: bold;
+  color: #333333;
+  padding: 10px;
+}
+
+//---------for 小鈴鐺icon------------
+.fa-stack[data-count]:after{
+    position:absolute;
+    right:-5%;
+    top:0%;
+    content: attr(data-count);
+    font-size: 8px;
+    padding:4px;
+    border-radius:999px;
+    line-height:.75em;
+    color: white;
+    background:tomato;
+    text-align:center;
+    font-weight:bold;
+  }
+
+.bell-btn{
+    background:#ffffff;
+}
+
+
+.bell-btn:hover{
+    background:#ffffff;
+    // border-bottom: 2.5px solid #1A85A0;
+    color: #1A85A0;
+}
+
+.bell-markread{
+  display: flex;
+  justify-content: space-between;
+  color: #c5c5c5;
+  font-size: 13px;
+  align-items: center;
+  margin: 5px;
+  .mark-btn{
+    color: #c5c5c5;
+    font-size: 13px;
+    background:#ffffff;
+    width: 39%;
+  }
+  .mark-btn:hover{
+    color: #1A85A0;
+    background:#ffffff;
+  }
+}
+
+.bell-msg-date{
+  color: #828282;
+  margin-right: 5px;
+}
+
+.bell-msg-title{
+  color: #323232;
+}
+.bell-msg-description{
+  color: #828282;
+}
+
+.read-circle-btn{
+  height: 16px;
+  font-size: 12px;
+  border-radius: 50%;
+  text-align: center;
+  float: right;
+  margin-left: 5px;
+}
+
+.read-circle-btn:hover{
+  cursor: pointer;
+}
+//---------for 小鈴鐺icon------------

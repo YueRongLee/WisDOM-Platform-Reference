@@ -1,0 +1,125 @@
+/**
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+// Index .less, any imports here will be included in the final css build
+
+@import '~antd/dist/antd.css';
+@import '~bootstrap/less/bootstrap.less';
+@import './fonts.less';
+@import './variables.less';
+@import './cosmo/bootswatch.less';
+
+html,
+body {
+  font-size: @font-size-base;
+  line-height: @line-height-base;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+header {
+  flex: 0 1 auto;
+}
+
+#app {
+  flex: 1 1 auto;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+//---------for 小鈴鐺icon------------
+.fa-stack[data-count]:after{
+  position:absolute;
+  right:-5%;
+  top:0%;
+  content: attr(data-count);
+  font-size:8px;
+  padding:4px;
+  border-radius:999px;
+  line-height:.75em;
+  color: white;
+  background:tomato;
+  text-align:center;
+  font-weight:bold;
+}
+
+.bell-btn{
+  background:#ffffff;
+}
+
+
+.bell-btn:hover{
+  background:#ffffff;
+  // border-bottom: 2.5px solid #1A85A0;
+  color: #1A85A0;
+}
+
+.bell-markread{
+display: flex;
+justify-content: space-between;
+color: #c5c5c5;
+font-size: 13px;
+align-items: center;
+margin: 5px;
+.mark-btn{
+  color: #c5c5c5;
+  font-size: 13px;
+  background:#ffffff;
+  width: 39%;
+}
+.mark-btn:hover{
+  color: #1A85A0;
+  background:#ffffff;
+}
+}
+
+.bell-msg-date{
+color: #828282;
+margin-right: 5px;
+}
+
+.bell-msg-title{
+color: #323232;
+}
+.bell-msg-description{
+color: #828282;
+}
+
+.read-circle-btn{
+height: 16px;
+font-size: 12px;
+border-radius: 50%;
+text-align: center;
+float: right;
+margin-left: 5px;
+}
+
+.read-circle-btn:hover{
+cursor: pointer;
+}
+//---------for 小鈴鐺icon------------
+
+.ant-pagination-options {
+  display: none !important;
+}

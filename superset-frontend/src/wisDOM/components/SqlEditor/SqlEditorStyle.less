@@ -1,0 +1,43 @@
+@import '../../../../stylesheets/less/variables.less';
+
+.sqlEditorContainer {
+  display: flex;
+  flex-direction: column;
+  /* width: 1000px; */
+  /* border: 1px solid red; */
+  th {
+    &:hover {
+      background: @gray-bg;
+    }
+  }
+}
+
+.entityContainer {
+  display: flex;
+  flex-direction: row;
+}
+
+.exploreButton {
+  margin-left: 10px;
+}
+
+.exploreInput {
+  width: 300px;
+}
+
+.action {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .anticon {
+    margin-left: 5px;
+    svg {
+      cursor: pointer;
+      width: 20px;
+      height: 20px;
+      &:hover {
+        color: @primary-color;
+      }
+    }
+  }
+}

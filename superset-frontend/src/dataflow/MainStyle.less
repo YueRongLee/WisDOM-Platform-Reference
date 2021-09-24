@@ -1,0 +1,57 @@
+@import '~stylesheets/less/variables.less';
+
+@bgColor: @gray-dark;
+
+.workspaceContainer {
+  background-color: white;
+  height: 100%;
+  display: flex;
+  width: 100%;
+  .list-menu {
+    width: 40px;
+    background-color: @bgColor;
+    display: flex;
+    justify-content: center;
+    span {
+      color: #fff;
+      padding-top: 10px;
+      cursor: pointer;
+      height: 20px;
+    }
+  }
+  .dataflowlist {
+    flex-basis: 20%;
+    height: 100%;
+    background-color: @bgColor;
+    // overflow-y: scroll;
+    // transition: all .1s ease-in;
+    // display: flex;
+    // flex-direction: column;
+    // overflow-x: hidden;
+    // flex-shrink: 0;
+    .dataflowlist-icon {
+      padding: 15px 20px;
+      text-align: right;
+      span {
+        cursor: pointer;
+        color: #fff;
+      }
+    }
+    .list-area {
+      display: flex;
+      // overflow-y: scroll;
+      transition: all .1s ease-in;
+      flex-direction: column;
+      overflow-x: hidden;
+      flex-shrink: 0;
+      max-width: 35vh;
+    }
+    .ant-menu {
+        background-color: @bgColor;
+        color: #879399;
+        &.ant-menu-horizontal {
+            border-bottom: 0px;
+        }
+    }
+  }
+}

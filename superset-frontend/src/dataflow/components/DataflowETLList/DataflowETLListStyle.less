@@ -1,0 +1,77 @@
+@import '~stylesheets/less/variables.less';
+
+@bgColor: @gray-dark;
+@itemIndent: 18px;
+
+// .listTitle {
+//     color: @gray;
+//     padding: 20px @itemIndent 0 @itemIndent;
+//     .ant-divider {
+//       border-color: @gray;
+//       margin: 8px 0 12px 0;
+//     }
+// }
+.ant-list-empty-text {
+  color: @gray-light;
+  text-align: left;
+}
+
+.listItem {
+  position: relative;
+  color: @gray-light;
+  padding: 8px @itemIndent;
+  cursor: pointer;
+  transition: all .1s ease-in;
+  font-size: 16px;
+  display: flex;
+  flex-direction: column;
+  &:hover, &.curr {
+    background-color: lighten(@bgColor, 10%);
+  }
+  &.curr:before {
+    content: '';
+    display: block;
+    width: 3px;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-color: #20a7c9;
+  }
+  p {
+    margin: 0;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+  span {
+    font-size: 12px;
+    color: #8E8E8E;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+}
+
+// .dataflowEtlList {
+//     .ant-list {
+//         max-height: 70vh;
+//         transition: color .3s ease;
+//         overflow-y: scroll;
+//         color: rgba(0, 0, 0, 0);
+//         overflow-x: hidden;
+//         max-width: 35vh;
+//         &:hover {
+//           color: rgba(0, 0, 0, 0.3);
+//         }
+//         &::-webkit-scrollbar-thumb {
+//           box-shadow: inset 0 0 0 10px;
+//         }
+//         &::-webkit-scrollbar, &::-webkit-scrollbar-thumb {
+//           width: 26px;
+//           border-radius: 13px;
+//           background-clip: padding-box;
+//           border: 10px solid transparent;
+//         }
+//       }
+// }

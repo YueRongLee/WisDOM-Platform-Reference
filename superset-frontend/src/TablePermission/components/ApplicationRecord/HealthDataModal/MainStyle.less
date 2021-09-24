@@ -1,0 +1,370 @@
+@import '~stylesheets/less/variables.less';
+
+// .wisdom {
+//   background-color: white;
+// }
+
+
+.mainContainer {
+  height: 100%;
+  padding: 0 10px;
+  background-color: white;
+}
+
+.wisdom {
+  /* background-color: white; */
+  overflow: auto;
+  height: 100vh;
+  margin-top: -20px; 
+}
+
+.title {
+  font-size: 35px;
+  font-weight: bold;
+  padding: 10px;
+}
+
+.subTitle {
+  font-size: 16px;
+  font-weight: bold;
+  padding: 10px 0px;
+}
+
+.domain {
+  display: flex;
+}
+
+.footerAction {
+  text-align: right;
+}
+
+.fixIcon2:hover{
+  color: #20a7c9;
+  cursor: pointer;
+}
+
+.badgeCircle{
+  color: white;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  font-size: 5px;
+  display: inline-block;
+  text-align: center;
+  background-color: #3e86a0;
+  position: absolute;
+  z-index: 99;
+  top: -5px;
+  right: -5px;
+}
+
+.listWrapper{
+  width: 100%;
+  box-shadow: 0px 0px 5px 5px rgb(245 245 245);
+}
+
+.listWrapper:hover{
+  background-color: #f5f5f5;
+}
+
+.healthy-left-form-container {
+  .ant-empty-image, .ant-empty-description {
+    text-align: center;
+  }
+}
+
+.refrence-by-list-container {
+  margin-left: 20px;
+  // max-height: 200px;
+  overflow: auto;
+  ul {
+    margin: 0;
+    li {
+      margin: 0!important;
+      padding: 5px 20px!important;
+      div {
+        overflow-x: hidden;
+        text-overflow : ellipsis;
+        white-space: nowrap;
+      }
+    }
+  }
+}
+
+.Addbtn{
+  display: flex;
+  justify-content: center;
+}
+
+.cartListTitle{
+  font-size: 24px;
+  color: #000000A6;
+  display: flex;
+  justify-content: center;
+}
+
+.cartListText{
+  font-size: 22px;
+  color: #000000A6;
+  width: 95%;
+}
+
+.cartListIcon{
+  width: 5%;
+  font-size: 15px;
+  color: #000000A6;
+  display: flex;
+}
+
+.cartListIcon:hover{
+  color:#20a7c9;
+  cursor: pointer;
+}
+
+// .buttonGroup {
+//   display: flex;
+//   justify-content: space-between;
+//   align-items: center;
+//   padding-top: 10px;
+//   & :not(:last-child) {
+//     margin-right: 8px;
+//   }
+//   button {
+//     color: #ffffff;
+//     background-color: #20a7c9;
+//     border-color: #20a7c9;
+//     padding: 5px 10px;
+//     font-size: 12px;
+//     line-height: 1.5;
+//     border-radius: 4px;
+//     margin-right: 10px;
+//   }
+// }
+
+.mainTitle {
+  font-size: 35px;
+  font-weight: bold;
+  color: #333333;
+  padding: 10px;
+}
+
+
+
+
+
+.searchtableName {
+  .ant-tag {
+     margin-left: 5px;
+  }
+}
+
+.linkbutton {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.blockchainstatus {
+  width: 28px;
+  height: 28px;
+  border-radius: 100%;
+  background-color: @gray;
+  display: inline-block;
+  &.verifyok {
+    background-color: @success;
+  }
+}
+
+.blockchaincircle {
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
+  background-color: @gray;
+  display: inline-block;
+  cursor: pointer;
+  transition: all .2s ease-in;
+  &:hover {
+    background-color: @gray-dark;
+  }
+  a {
+    width: 100%;
+    height: 100%;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    padding: 6px 0;
+    img {
+      width: 15px;
+    }
+    span {
+      font-size: 20px;
+      color: white;
+    }
+  }
+}
+
+.healthlistWrapper{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.health-list-container{
+  border: 1px solid #e8e8e8;
+  border-radius: 4px;
+  overflow: auto;
+  padding: 8px 24px;
+  height: 730px;
+}
+
+.health-owner{
+  color: white;
+  height: 25px;
+  width: 25px;
+  border-radius: 50%;
+  font-size: 16px;
+  display: inline-block;
+  text-align: center;
+  margin: 5px;
+  font-weight: bold;
+}
+
+.copyBtn{
+  display: flex;
+  align-items: center;
+  float: right;
+}
+
+@media (min-width: 576px) {
+  .reference-table {
+    .ant-col-sm-18 {
+      max-width: 97%;
+    }
+  }
+}
+//---------for 小鈴鐺icon------------
+.fa-stack[data-count]:after{
+    position:absolute;
+    right:-5%;
+    top:0%;
+    content: attr(data-count);
+    font-size: 8px;
+    padding:4px;
+    border-radius:999px;
+    line-height:.75em;
+    color: white;
+    background:tomato;
+    text-align:center;
+    font-weight:bold;
+  }
+
+.bell-btn{
+    background:#ffffff;
+}
+
+
+.bell-btn:hover{
+    background:#ffffff;
+    // border-bottom: 2.5px solid #1A85A0;
+    color: #1A85A0;
+}
+
+.bell-markread{
+  display: flex;
+  justify-content: space-between;
+  color: #c5c5c5;
+  font-size: 13px;
+  align-items: center;
+  margin: 5px;
+  .mark-btn{
+    color: #c5c5c5;
+    font-size: 13px;
+    background:#ffffff;
+    width: 39%;
+  }
+  .mark-btn:hover{
+    color: #1A85A0;
+    background:#ffffff;
+  }
+}
+
+.bell-msg-date{
+  color: #828282;
+  margin-right: 5px;
+}
+
+.bell-msg-title{
+  color: #323232;
+}
+.bell-msg-description{
+  color: #828282;
+}
+
+.read-circle-btn{
+  height: 16px;
+  font-size: 12px;
+  border-radius: 50%;
+  text-align: center;
+  float: right;
+  margin-left: 5px;
+}
+
+.read-circle-btn:hover{
+  cursor: pointer;
+}
+//---------for 小鈴鐺icon------------
+.checkbox-wrapper {
+  overflow: auto;
+  h4 {
+    margin-left: 20px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .table-updatetime {
+    margin-left: 20px;
+  }
+}
+
+.menu-content {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  // max-width: 80vh;
+  .publish-checkbox {
+      .ant-form-item-control-input-content {
+          padding-top: 20px;
+      }
+  }
+  .node-form-item-cron {
+      margin-top: 50px;
+      max-height: 100px;
+  }
+  .ant-form-item {
+      padding: 24px;
+      margin-bottom: 0;
+  }
+  .cronSelect {
+      .ant-form-item {
+          padding: 24px 0 15px 0;
+      }
+      span {
+          margin-bottom: 0;
+      }
+  }
+  .schema-list-wrapper {
+    // overflow: auto;
+    h4 {
+      margin-left: 20px;
+      margin-left: 20px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .table-updatetime {
+      margin-left: 20px;
+    }
+  }
+  .ant-table-wrapper {
+    overflow: auto;
+  }
+}

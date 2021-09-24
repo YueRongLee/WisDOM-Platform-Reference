@@ -1,0 +1,85 @@
+@import '../../../../../stylesheets/less/variables.less';
+@height: 109.33px;
+@lineheight: 18px;
+@ellipsiswidth: 30px;
+
+.ant-list-item {
+  margin-bottom: 8px !important;
+  padding: 0 4px !important;
+  .ant-list-item-extra {
+    display: flex;
+    align-items: center;
+  }
+  .itemWrapper {
+    flex: 1;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    .ant-btn {
+      padding: 0;
+    }
+  }
+  .ant-card {
+    transition: all .1s .1s ease-in;
+    border-radius: 10px;
+    .ellipsis {
+      overflow: hidden;
+      height: @height;
+      line-height: @lineheight; }
+
+    .ellipsis:before {
+      content:"";
+      float: left;
+      width: 5px; height: @height; }
+
+    .ellipsis > *:first-child {
+      float: right;
+      width: 100%;
+      margin-left: -5px; }		
+
+    .ellipsis:after {
+      display: none; //card後面的...影藏掉
+      content: "\02026";  
+
+      box-sizing: content-box;
+      -webkit-box-sizing: content-box;
+      -moz-box-sizing: content-box;
+
+      float: right; position: relative;
+      top: -@lineheight; left: 100%; 
+      width: @ellipsiswidth; margin-left: -@ellipsiswidth;
+      padding-right: 5px;
+      
+      text-align: right;
+
+      background: -webkit-gradient(linear, left top, right top,
+        from(rgba(255, 255, 255, 0)), to(white), color-stop(50%, white));
+      background: -moz-linear-gradient(to right, rgba(255, 255, 255, 0), white 50%, white);			
+      background: -o-linear-gradient(to right, rgba(255, 255, 255, 0), white 50%, white);
+      background: -ms-linear-gradient(to right, rgba(255, 255, 255, 0), white 50%, white);
+      background: linear-gradient(to right, rgba(255, 255, 255, 0), white 50%, white); }
+  }
+}
+
+.itemTitle {
+  font-size: 18px;
+  font-weight: bold;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.itemsubTitle {
+  font-size: 12px;
+  font-weight: bold;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.itemContent {
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.65);
+  flex: 1;
+}

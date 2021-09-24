@@ -1,0 +1,57 @@
+/* .node-form-item {
+    display: flex;
+    flex-direction: column;
+} */
+/* .ant-form-item-label {
+    text-align: left;
+} */
+/* checkbox */
+.ant-checkbox-wrapper {
+    margin-bottom: 20px;
+}
+.checkbox-group-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.checkbox-group-item label {
+    margin-bottom: 20px;
+}
+.checkbox-title {
+    display: flex;
+    justify-content: space-around;
+}
+/* checbox end */
+/* filter */
+.filter-wrapper {
+    padding: 20px;
+}
+.filter-radio-area {
+    display: flex;
+    flex-direction: column;
+}
+.filter-radio-area label {
+    margin-bottom: 20px;
+}
+.filter-form-item {
+    padding: 0;
+}
+.filter-add-button {
+    padding: 10px 0;
+    width: 200px;
+}
+/* filter end */
+/* customize */
+.customize-wrapper {
+    padding: 15px;
+}
+/* customize end */
+
+.target-outputdata-wrapper {
+    overflow: auto;
+    padding: 15px;
+}
+.target-outputdata-wrapper .ant-list-items li{
+color: #888888;
+}

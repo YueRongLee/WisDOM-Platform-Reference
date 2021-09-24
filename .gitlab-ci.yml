@@ -1,0 +1,215 @@
+stages:
+  - dev:containerized
+  - dev:deploy
+  - dev:test
+  - qas:containerized
+  - qas:deploy
+  - prd:containerized
+  - prd:deploy
+
+.only_dev: &only_dev
+  only:
+    - develop
+
+.only_qas: &only_qas
+  only:
+    - /^sit-.*$/
+
+.only_prd: &only_prd
+  only:
+    - /^release-.*$/
+
+.only_schedule: &only_schedule
+  only:
+    - schedule
+
+dev:containerized:
+  stage: dev:containerized
+  <<: *only_dev
+  image: docker:git
+  services:
+    - docker:dind
+  variables:
+    NPM_BUILD_CMD: build-dev
+  script:
+    - gen_docker_auth_config
+    - makeVersion
+    - containerized
+  tags:
+    - aws
+    - m4-large
+  when: manual
+
+dev:deploy:
+  stage: dev:deploy
+  <<: *only_dev
+  image: alpine:3.7
+  variables:
+    SUPERSET_HOST: ${SUPERSET_HOST_DEV}
+  script:
+    - init_ssh_trust_key
+    - cp $SUPERSET_ENV_FILE_DEV ./docker/.env
+    - do_deploy
+  tags:
+    - aws
+    - m4-large
+  when: manual
+
+dev:test:
+  stage: dev:test
+  <<: *only_dev
+  image: node:14
+  artifacts:
+    expire_in: 1 day
+    paths:
+      - superset-frontend/coverage/lcov-report
+  script:
+    - cd superset-frontend
+    - npm i && npm run test-cover:wisDOM || true
+    - cd ..
+  coverage: '/All files[^|]*\|[^|]*\s+([\d\.]+)/'
+  tags:
+    - aws
+    - m4-large
+
+dev:schedule-containerized:
+  stage: dev:containerized
+  <<: *only_schedule
+  image: docker:git
+  services:
+    - docker:dind
+  variables:
+    NPM_BUILD_CMD: build-dev
+  script:
+    - gen_docker_auth_config
+    - makeVersion
+    - containerized
+  tags:
+    - aws
+    - m4-large
+
+dev:schedule-deploy:
+  stage: dev:deploy
+  <<: *only_schedule
+  image: alpine:3.7
+  variables:
+    SUPERSET_HOST: ${SUPERSET_HOST_DEV}
+  script:
+    - init_ssh_trust_key
+    - cp $SUPERSET_ENV_FILE_DEV ./docker/.env
+    - do_deploy
+  tags:
+    - aws
+    - m4-large
+  when: delayed
+  start_in: 2 minutes
+
+qas:containerized:
+  stage: qas:containerized
+  <<: *only_qas
+  image: docker:git
+  services:
+    - docker:dind
+  variables:
+    NPM_BUILD_CMD: build-qas
+  script:
+    - gen_docker_auth_config
+    - makeVersion
+    - containerized
+  tags:
+    - aws
+    - m4-large
+
+qas:deploy:
+  stage: qas:deploy
+  <<: *only_qas
+  image: alpine:3.7
+  variables:
+    SUPERSET_HOST: ${SUPERSET_HOST_QAS}
+  script:
+    - init_ssh_trust_key
+    - cp $SUPERSET_ENV_FILE_QAS ./docker/.env
+    - do_deploy
+  tags:
+    - aws
+    - m4-large
+  when: delayed
+  start_in: 2 minutes
+
+prd:containerized:
+  stage: prd:containerized
+  <<: *only_prd
+  image: docker:git
+  services:
+    - docker:dind
+  variables:
+    NPM_BUILD_CMD: build
+  script:
+    - gen_docker_auth_config
+    - makeVersion
+    - containerized
+  tags:
+    - aws
+    - m4-large
+
+prd:deploy:
+  stage: prd:deploy
+  <<: *only_prd
+  image: alpine:3.7
+  variables:
+    SUPERSET_HOST: ${SUPERSET_HOST_PRD}
+  script:
+    - init_ssh_trust_key
+    - cp $SUPERSET_ENV_FILE_PRD ./docker/.env
+    - do_deploy
+  tags:
+    - aws
+    - m4-large
+  when: delayed
+  start_in: 2 minutes
+
+.auto_devops: &auto_devops |
+  # devops shared functions
+
+  function gen_docker_auth_config() {
+    mkdir ~/.docker
+    echo "{\"auths\":{\"$CI_REGISTRY\":{\"auth\":\"$DOCKER_REGISTRY_LOGIN_BASE64\"}}}" > ~/.docker/config.json
+  }
+
+  function init_ssh_trust_key() {
+    apk add --no-cache openssh
+    mkdir -p ~/.ssh
+    echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
+    cp $SSH_PRIVATE_KEY ~/.ssh/id_rsa
+    chmod 600 ~/.ssh/id_rsa
+    cp $SSH_PUBLIC_KEY ~/.ssh/id_rsa.pub
+  }
+
+  function makeVersion() {
+    apk add jq
+    cd superset-frontend
+    if [ -z ${CI_COMMIT_TAG+x} ]; then IMAGE_TAG=$CI_COMMIT_SHORT_SHA; else IMAGE_TAG=$CI_COMMIT_TAG; fi
+    cat package.json | jq '.version = "1.0.0-'"$IMAGE_TAG"'"' > tmp.json
+    mv tmp.json package.json
+    cd ..
+  }
+
+  function containerized() {
+    if [ -z ${CI_COMMIT_TAG+x} ]; then IMAGE_TAG=$CI_COMMIT_SHORT_SHA; else IMAGE_TAG=$CI_COMMIT_TAG; fi
+    docker build --pull --build-arg NPM_BUILD_CMD -t $CI_REGISTRY_IMAGE .
+    docker tag $CI_REGISTRY_IMAGE:latest $CI_REGISTRY_IMAGE:$IMAGE_TAG
+    docker push $CI_REGISTRY_IMAGE:$IMAGE_TAG
+  }
+
+  function do_deploy() {
+    ssh $SSHUSER@$SUPERSET_HOST "mkdir -p $CI_PROJECT_NAME/db_home && mkdir -p $CI_PROJECT_NAME/redis && mkdir -p $CI_PROJECT_NAME/superset_home"
+    if [ -z ${CI_COMMIT_TAG+x} ]; then IMAGE_TAG=$CI_COMMIT_SHORT_SHA; else IMAGE_TAG=$CI_COMMIT_TAG; fi
+    sed -i "s#__CI_REGISTRY_IMAGE_AND_TAG__#$CI_REGISTRY_IMAGE:$IMAGE_TAG#" ./docker-compose.yml
+    scp -r docker $SSHUSER@$SUPERSET_HOST:$CI_PROJECT_NAME/
+    scp docker-compose.yml $SSHUSER@$SUPERSET_HOST:$CI_PROJECT_NAME/
+    ssh $SSHUSER@$SUPERSET_HOST "cd $CI_PROJECT_NAME && docker-compose pull && docker-compose down && docker-compose up -d && docker image prune -af"
+    ssh $SSHUSER@$SUPERSET_HOST "docker exec superset_cache sh persist.sh"
+  }
+
+before_script:
+  - *auto_devops

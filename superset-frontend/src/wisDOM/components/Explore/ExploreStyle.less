@@ -1,0 +1,70 @@
+.exploreContainer {
+  display: flex;
+  margin-top: 10px;
+}
+
+// .tableListContainer {
+//   flex: 1 0 30vw;
+//   display: flex;
+//   flex-direction: column;
+//   padding: 20px;
+//   font-size: 20px;
+//   overflow: hidden;
+//   .ant-tree-treenode {
+//     width: 100%;
+//   }
+//   .ant-tree-node-content-wrapper {
+//     white-space: nowrap;
+//     overflow: hidden;
+//     text-overflow: ellipsis;
+//   }
+// }
+
+.tableListContainer {
+    flex: 1 0 30vh;
+    display: flex;
+    flex-direction: column;
+    // justify-content: space-between;
+    // padding: 20px 20px 0 20px;
+    font-size: 20px;
+    overflow: hidden;
+    height: calc(100vh - 143px);
+    // max-height: 180px;
+    .ant-tree-treenode {
+        width: 100%;
+    }
+    .ant-tree-node-content-wrapper {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .ant-form-item {
+        margin-bottom: 24px;
+    }
+}
+
+
+.tableName {
+  color: blue;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.columnName {
+  color: green;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sqlContainer {
+  flex: 3 1 60vw;
+  display: flex;
+  flex-direction: column;
+  padding-left: 10px;
+  overflow: hidden;
+}
+
+.footerAction {
+  margin: 18px 0;
+}
